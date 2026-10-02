@@ -1,26 +1,26 @@
 RECS = {
     "Rectangle": {
-        "summary": "Shoulders, waist and hips are similar in width. Goal: create curves.",
+        "summary": "Your shoulders, waist and hips are fairly close in width. Pieces with a little shape or movement can add definition, while clean straight lines work just as well.",
         "outfits": ["Peplum tops and ruffled blouses", "Belted dresses and wrap dresses", "High-waisted flared trousers", "Layered looks with textures"],
         "colors": ["Pastels on top, bold on bottom", "Color-blocking", "Rich jewel tones"],
         "tips": ["Define the waist with belts", "Add volume with ruffles or pleats", "Avoid boxy, straight cuts"]},
     "Pear": {
-        "summary": "Hips are wider than shoulders. Goal: balance the upper body.",
+        "summary": "Your hips are a little wider than your shoulders. If you feel like balancing the silhouette, try drawing the eye upward; you can also lean into the contrast.",
         "outfits": ["Boat-neck and off-shoulder tops", "A-line skirts and dresses", "Structured blazers with shoulder detail", "Dark straight or bootcut jeans"],
         "colors": ["Bright or light colors on top", "Dark colors on bottom", "Bold prints on top"],
         "tips": ["Draw attention upward with necklines", "Avoid clingy fabrics on hips", "Choose wide-leg over skinny"]},
     "Apple": {
-        "summary": "Fuller midsection with slimmer legs. Goal: elongate the torso and show off legs.",
+        "summary": "Your proportions put a little more emphasis around the middle, with your legs as a natural focal point. Open layers and easy lines can feel comfortable without hiding your shape.",
         "outfits": ["Empire-waist tops and dresses", "V-neck tops", "Straight-leg trousers", "Open jackets and long cardigans"],
         "colors": ["Solid darker tones on the torso", "Bright colors on legs or accessories", "Monochrome outfits"],
         "tips": ["Avoid tight belts at the waist", "Choose flowy, non-clingy fabrics", "Show off legs with knee-length hems"]},
     "Hourglass": {
-        "summary": "Shoulders and hips balanced with a defined waist. Goal: highlight the waist.",
+        "summary": "Your shoulders and hips are similar in width, with a more defined waist. Fitted or wrap styles can follow that shape without much fuss.",
         "outfits": ["Wrap dresses", "Fitted tailored blazers", "High-waisted pencil skirts", "Belted coats"],
         "colors": ["Almost any color works", "Monochrome for a long line", "Medium-scale prints"],
         "tips": ["Emphasize the waist", "Avoid shapeless, oversized cuts", "Choose stretchy, fitted fabrics"]},
     "Inverted Triangle": {
-        "summary": "Shoulders are wider than hips. Goal: add volume below, soften the top.",
+        "summary": "Your shoulders are broader than your hips. Softer tops and a little volume below can balance the outline, if that's the look you're after.",
         "outfits": ["A-line and full skirts", "Wide-leg pants", "Scoop or V-neck tops", "Printed or bright bottoms"],
         "colors": ["Darker, simple colors on top", "Bright or patterned bottoms", "Soft neutrals above"],
         "tips": ["Avoid shoulder pads and puff sleeves", "Add detail at the hips", "Choose soft, drapey fabrics on top"]},

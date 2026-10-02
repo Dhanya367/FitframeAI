@@ -19,6 +19,9 @@ def init_db():
             c.execute("ALTER TABLE results ADD COLUMN style_preference TEXT")
 
 
+init_db()
+
+
 @app.route("/")
 def home():
     return render_template("home.html")
@@ -61,7 +64,7 @@ def history():
         rows = c.execute("SELECT created, name, body_type FROM results ORDER BY id DESC LIMIT 50").fetchall()
     return render_template("history.html", rows=rows)
 
+init_db()
 
 if __name__ == "__main__":
-    init_db()
     app.run(debug=True)

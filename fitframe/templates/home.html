@@ -1,22 +1,23 @@
 {% extends "base.html" %}{% from "macros.html" import sil %}
 {% block body %}
 <section class="hero"><div class="wrap"><div>
-<span class="eyebrow">AI-powered style guide</span>
-<h1>Find the styles that <span>love your shape.</span></h1>
-<p class="lead">Upload a photo and FitFrame AI measures your proportions, identifies your body type and builds outfit, color and styling advice just for you.</p>
-<div class="cta-row"><a class="btn" href="/start">Find my style &rarr;</a><a class="btn o" href="#how">See how it works</a></div></div>
-<div class="stage"><span class="chip-f" style="top:-16px;left:20px">&#10024; AI detected</span><span class="chip-f" style="bottom:-16px;right:20px">Your shape &#10003;</span>
-<div class="row">{{ sil(34,30,34) }}{{ sil(30,24,44) }}{{ sil(40,40,36) }}{{ sil(42,22,42) }}{{ sil(46,28,30) }}</div></div></div>
+<span class="eyebrow">A more considered way to get dressed</span>
+<h1>Style that works with <span>your proportions.</span></h1>
+<p class="lead">A photo-based fit guide with outfit ideas, color notes and practical suggestions shaped around your measurements.</p>
+<div class="cta-row"><a class="btn" href="/start">Build my fit guide</a><a class="btn o" href="#how">How it works</a></div></div>
+<div class="stage"><div class="stage-top"><span class="chip-f">FITFRAME / FIELD NOTES</span><span class="chip-f">01 / 05</span></div>
+<div class="row">{{ sil(34,30,34) }}{{ sil(30,24,44) }}{{ sil(40,40,36) }}{{ sil(42,22,42) }}{{ sil(46,28,30) }}</div>
+<div class="stage-top stage-bottom"><span class="chip-f">PROPORTIONS, MAPPED</span><span class="chip-f">FIG. 01</span></div></div></div></div>
 <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" height="60"><path d="M0 40C240 90 480 0 720 30S1200 80 1440 20V80H0Z"/></svg></section>
 <section class="sec" id="how"><div class="wrap"><div class="head rv"><span class="eyebrow">How it works</span><h2>Three simple steps</h2><p>From photo to personal style guide in a few seconds.</p></div>
 <div class="g3">
-<div class="card rv"><div class="ico">&#128247;</div><div class="n">STEP 01</div><h3>Upload your photo</h3><p>Add a full-body front photo and your height. A side photo is optional for better accuracy.</p></div>
-<div class="card rv"><div class="ico">&#129302;</div><div class="n">STEP 02</div><h3>AI measures you</h3><p>MediaPipe finds your body landmarks and OpenCV estimates your shoulder, waist and hip sizes.</p></div>
-<div class="card rv"><div class="ico">&#128087;</div><div class="n">STEP 03</div><h3>Get your style</h3><p>See your body type with outfit ideas, flattering colors and styling tips.</p></div></div></div></section>
+<div class="card rv"><div class="ico">01</div><div class="n">THE FIRST STEP</div><h3>Add a photo</h3><p>Use a full-body front photo and your height. A side photo is optional.</p></div>
+<div class="card rv"><div class="ico">02</div><div class="n">THE FIT</div><h3>See your proportions</h3><p>Body landmarks are used to estimate shoulder, waist and hip measurements.</p></div>
+<div class="card rv"><div class="ico">03</div><div class="n">THE IDEAS</div><h3>Make it your own</h3><p>Explore outfit combinations, color suggestions and practical styling notes.</p></div></div></div></section>
 <section class="sec"><div class="wrap"><div class="head rv"><span class="eyebrow">Why FitFrame</span><h2>Simple, private, personal</h2></div>
 <div class="g3">
-<div class="card rv"><div class="ico">&#9889;</div><h3>Instant results</h3><p>Your analysis is ready in a couple of seconds, no sign-up needed.</p></div>
-<div class="card rv"><div class="ico">&#128274;</div><h3>Private by design</h3><p>Photos are processed in memory and never saved on the server.</p></div>
-<div class="card rv"><div class="ico">&#127912;</div><h3>Truly personal</h3><p>Outfits, colors and tips matched to your own proportions.</p></div></div></div></section>
+<div class="card rv"><div class="ico">A</div><h3>Quick to use</h3><p>Your guide is ready in a couple of seconds, with no sign-up.</p></div>
+<div class="card rv"><div class="ico">B</div><h3>Private by design</h3><p>Photos are processed in memory and never saved on the server.</p></div>
+<div class="card rv"><div class="ico">C</div><h3>Made for your fit</h3><p>Outfit ideas, colors and tips start with your own proportions.</p></div></div></div></section>
 <div class="wrap"><div class="cta rv"><h2>Ready to find your style?</h2><p>It takes less than a minute and it's completely free.</p><a class="btn w" href="/start">Start my analysis</a></div></div>
 {% endblock %}

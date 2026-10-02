@@ -1,6 +1,13 @@
-{% extends "base.html" %}{% block title %}History | FitFrame AI{% endblock %}
+{% extends "base.html" %}{% block title %}History | FitFrame{% endblock %}
 {% block body %}
-<section class="ph"><div class="wrap"><h1>Past results</h1><p class="lead">Your last 50 analyses.</p></div></section>
-<div class="wrap" style="max-width:760px;padding-top:50px"><div class="card"><table><tr><th>Date</th><th>Name</th><th>Body type</th></tr>
-{% for d, n, t in rows %}<tr><td>{{ d }}</td><td>{{ n }}</td><td><span class="chip">{{ t }}</span></td></tr>{% endfor %}</table></div></div>
+<section class="ph"><div class="wrap"><span class="eyebrow">YOUR FITFRAME</span><h1>Analysis history</h1><p class="lead">A record of your recent style sessions.</p></div></section>
+<div class="wrap history-wrap">
+{% if rows %}
+<div class="card history-card"><table><thead><tr><th>Date</th><th>Name</th><th>Body type</th></tr></thead><tbody>
+{% for d, n, t in rows %}<tr><td>{{ d }}</td><td>{{ n }}</td><td><span class="chip">{{ t }}</span></td></tr>{% endfor %}
+</tbody></table></div>
+{% else %}
+<section class="empty-state"><span class="empty-mark" aria-hidden="true">01</span><div><h2>No analyses yet</h2><p>Your saved results will show up here after your first style session.</p><a class="btn sm" href="/start">Start an analysis</a></div></section>
+{% endif %}
+</div>
 {% endblock %}
