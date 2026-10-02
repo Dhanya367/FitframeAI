@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}History | FitFrame AI{% endblock %}
+{% block body %}
+<section class="ph"><div class="wrap"><h1>Past results</h1><p class="lead">Your last 50 analyses.</p></div></section>
+<div class="wrap" style="max-width:760px;padding-top:50px"><div class="card"><table><tr><th>Date</th><th>Name</th><th>Body type</th></tr>
+{% for d, n, t in rows %}<tr><td>{{ d }}</td><td>{{ n }}</td><td><span class="chip">{{ t }}</span></td></tr>{% endfor %}</table></div></div>
+{% endblock %}

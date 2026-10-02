@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% from "macros.html" import sil %}{% block title %}Body types | FitFrame AI{% endblock %}
+{% block body %}
+<section class="ph"><div class="wrap"><span class="eyebrow">Style guide</span><h1>Know your <span class="grad">body type</span></h1>
+<p class="lead">Each shape has outfits, colors and tips that bring out its best. Find yours below.</p></div></section>
+{% set dims={'Rectangle':(40,38,40),'Pear':(34,28,50),'Apple':(44,46,38),'Hourglass':(46,26,46),'Inverted Triangle':(52,32,34)} %}
+<div class="wrap" style="padding-top:60px">
+{% for name, r in recs.items() %}
+<div class="tp rv"><div class="tv">{{ sil(*dims[name]) }}<h3>{{ name }}</h3></div>
+<div class="tb"><p class="lead">{{ r.summary }}</p>
+<h5>Outfits</h5><div class="chips">{% for x in r.outfits %}<span class="chip">{{ x }}</span>{% endfor %}</div>
+<h5>Colors</h5><div class="chips">{% for x in r.colors %}<span class="chip">{{ x }}</span>{% endfor %}</div>
+<h5>Tips</h5><ul class="list">{% for x in r.tips %}<li>{{ x }}</li>{% endfor %}</ul></div></div>
+{% endfor %}
+<div class="cta rv" style="margin-top:50px"><h2>Which one are you?</h2><p>Let the AI find out from a single photo.</p><a class="btn w" href="/start">Analyze my photo</a></div></div>
+{% endblock %}

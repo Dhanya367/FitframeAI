@@ -1,0 +1,24 @@
+{% extends "base.html" %}{% from "macros.html" import sil %}{% block title %}Your result | FitFrame AI{% endblock %}
+{% block body %}
+{% set dims={'Rectangle':(40,38,40),'Pear':(34,28,50),'Apple':(44,46,38),'Hourglass':(46,26,46),'Inverted Triangle':(52,32,34)} %}
+{% set d=dims[r.body_type] %}
+<section class="banner"><div class="wrap"><div><span class="eyebrow">{{ name }}, your {{ style_preference }} style and {{ r.body_type }} body type</span><h1>{{ r.body_type }}</h1><p>{{ rec.summary }}</p></div>
+{{ sil(*d) }}</div></section>
+<div class="wrap pull">
+<div class="card rv"><h4>Your measurements</h4>
+<div class="meas"><div class="m"><small>Shoulders</small><b>{{ "%g"|format(r.shoulder_in) }}"</b><em>{{ r.shoulder_cm }} cm</em></div>
+<div class="m"><small>Waist</small><b>{{ "%g"|format(r.waist_in) }}"</b><em>{{ r.waist_cm }} cm</em></div>
+<div class="m"><small>Hips</small><b>{{ "%g"|format(r.hip_in) }}"</b><em>{{ r.hip_cm }} cm</em></div></div>
+<p class="note">Estimated from your photo and height. Waist and hip are body circumference, shoulders are straight-line width. Expect about 2 inches of error{% if not r.used_side %}; add a side photo for better accuracy{% endif %}. Confirm with a tape measure before buying.</p></div>
+<div class="g2" style="margin-top:24px"><div class="card rv"><h4>Outfit ideas</h4><ul class="list">{% for x in rec.outfits %}<li>{{ x }}</li>{% endfor %}</ul></div>
+<div class="card rv"><h4>Color suggestions</h4><div class="chips">{% for x in rec.colors %}<span class="chip">{{ x }}</span>{% endfor %}</div>
+<p class="note">Based on your body type, selected style and height. Brighter or lighter shades draw the eye, deeper shades recede.</p></div></div>
+<div class="card rv" style="margin-bottom:24px"><h4>Styling tips</h4><ul class="list">{% for x in rec.tips %}<li>{{ x }}</li>{% endfor %}</ul></div>
+<div class="sh" id="others"><span class="eyebrow">Curious?</span><h2>Explore the other body types</h2></div>
+{% for n, o in recs.items() if n != r.body_type %}
+<div class="tp rv"><div class="tv">{{ sil(*dims[n]) }}<h3>{{ n }}</h3></div>
+<div class="tb"><p class="lead">{{ o.summary }}</p><h5>Outfits</h5><div class="chips">{% for x in o.outfits %}<span class="chip">{{ x }}</span>{% endfor %}</div>
+<h5>Colors</h5><div class="chips">{% for x in o.colors %}<span class="chip">{{ x }}</span>{% endfor %}</div></div></div>
+{% endfor %}
+<div style="text-align:center;margin-top:40px"><a class="btn" href="/start">Analyze another photo</a></div></div>
+{% endblock %}
