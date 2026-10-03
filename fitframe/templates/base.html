@@ -1,10 +1,10 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{% block title %}FitFrame AI{% endblock %}</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=2"></head><body>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=7"></head><body>
 <header class="nav"><div class="in"><a class="logo" href="/"><i></i>FitFrame <b>AI</b></a>
-<nav><a href="/">Home</a><a href="/#how">How it works</a><a href="/history">History</a></nav>
-<a class="btn sm" href="/start">Try it free</a></div></header>
+<nav><a href="/">Home</a><a href="/#how">How it works</a>{% if session.get('user_id') %}<a href="/history">History</a>{% endif %}</nav>
+{% if session.get('user_id') %}<form class="nav-session" action="{{ url_for('logout') }}" method="post"><span>{{ session.get('email') }}</span><button class="btn sm o" type="submit">Sign out</button></form>{% else %}<a class="btn sm" href="/register">Sign up</a>{% endif %}</div></header>
 {% block body %}{% endblock %}
 <footer><div class="wrap"><div class="fg"><div><b>FitFrame AI</b><p>Smart body measurement and style recommendations.</p></div>
 <div><b>Explore</b><a href="/start">Analyze</a><a href="/history">History</a></div>

@@ -16,12 +16,12 @@ def _load(data):
     img = cv2.imdecode(np.frombuffer(data, np.uint8), cv2.IMREAD_COLOR)
     if img is None:
         raise AnalysisError("Could not read the image. Use a JPG or PNG.")
-    scale = 800 / max(img.shape[:2])
+    scale = 640 / max(img.shape[:2])
     return cv2.resize(img, None, fx=scale, fy=scale) if scale < 1 else img
 
 
 def _detect(img):
-    with mp_pose.Pose(static_image_mode=True, model_complexity=2,
+    with mp_pose.Pose(static_image_mode=True, model_complexity=1,
                       enable_segmentation=True) as pose:
         r = pose.process(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     if not r.pose_landmarks or r.segmentation_mask is None:

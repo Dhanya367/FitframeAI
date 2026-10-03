@@ -1,0 +1,47 @@
+{% extends "base.html" %}{% block title %}{{ 'Create account' if mode == 'register' else 'Sign in' }} | FitFrame{% endblock %}
+{% block body %}
+<main class="login-page {{ 'has-lamp' if show_lamp else 'no-lamp' }}">
+{% if show_lamp %}
+<section class="login-stage" id="lamp-panel" data-lit="{{ 'true' if lamp_lit else 'false' }}" aria-label="A bedside lamp">
+<div class="lamp-art" aria-hidden="true">
+<div class="lamp-glow"></div><div class="lamp-beam"></div>
+<div class="lamp-shade"></div><div class="lamp-stem"></div><div class="lamp-base"></div>
+</div>
+<p class="lamp-caption">A softer light for finding your style.</p>
+<button class="lamp-toggle" id="lamp-toggle" type="button" aria-pressed="{{ 'true' if lamp_lit else 'false' }}">
+<span class="lamp-toggle-dot"></span><span id="lamp-label">{{ 'Turn the lamp off' if lamp_lit else 'Turn the lamp on' }}</span>
+</button>
+</section>
+{% endif %}
+<section class="login-content" id="login-content"{% if show_lamp and not lamp_lit %} aria-hidden="true" inert{% endif %}>
+<span class="eyebrow">FITFRAME STYLE JOURNAL</span>
+<h1>{{ 'Create your account' if mode == 'register' else 'Welcome back' }}</h1>
+<p class="lead">{{ 'Save your style sessions and keep your fit notes close.' if mode == 'register' else 'Step back into your personal fit and style notes.' }}</p>
+<form class="form login-form" method="post" action="{{ '/register' if mode == 'register' else '/login' }}">
+<input type="hidden" name="next" value="{{ next_path }}">
+<input type="hidden" name="lamp" value="{{ '1' if show_lamp else '0' }}">
+{% if error %}<div class="err" role="alert">{{ error }}</div>{% endif %}
+<label class="field" for="email">Email address<input id="email" type="email" name="email" autocomplete="email" required value="{{ request.form.get('email', '') }}" placeholder="you@example.com"></label>
+<label class="field" for="password">Password<input id="password" type="password" name="password" autocomplete="{{ 'new-password' if mode == 'register' else 'current-password' }}" minlength="{{ 8 if mode == 'register' else 1 }}" required placeholder="{{ 'At least 8 characters' if mode == 'register' else 'Your password' }}"></label>
+{% if mode == 'register' %}<label class="field" for="confirm-password">Confirm password<input id="confirm-password" type="password" name="confirm_password" autocomplete="new-password" minlength="8" required placeholder="Enter your password again"></label>{% endif %}
+<button class="btn full" type="submit">{{ 'Create account' if mode == 'register' else 'Sign in' }}</button>
+</form>
+<p class="login-switch">{{ 'Already have an account?' if mode == 'register' else 'New to FitFrame?' }} <a href="{{ '/login?lamp=0' if mode == 'register' else '/register' }}">{{ 'Sign in' if mode == 'register' else 'Create an account' }}</a></p>
+</section>
+</main>
+{% if show_lamp %}<script>
+const lampPanel=document.getElementById('lamp-panel');
+const lampToggle=document.getElementById('lamp-toggle');
+const lampLabel=document.getElementById('lamp-label');
+const loginContent=document.getElementById('login-content');
+if(lampToggle){lampToggle.addEventListener('click',()=>{
+  const isLit=lampToggle.getAttribute('aria-pressed')!=='true';
+  lampToggle.setAttribute('aria-pressed',String(isLit));
+  lampPanel.dataset.lit=String(isLit);
+  loginContent.inert=!isLit;
+  loginContent.setAttribute('aria-hidden',String(!isLit));
+  lampLabel.textContent=isLit?'Turn the lamp off':'Turn the lamp on';
+});}
+</script>
+{% endif %}
+{% endblock %}
