@@ -509,18 +509,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.d
 .how-card-back p{max-width:30ch;color:var(--mute);font-size:1.05rem}
 @media(max-width:820px){.how-card{min-height:210px}.how-card-face{padding:22px}}
 @media(prefers-reduced-motion:reduce){.how-card-inner{transition:none}.hero:after{filter:none}.hero .shape-sample .sil{transform:none;will-change:auto}}
-.result-banner,.result-content{text-align:center}
-.result-banner .wrap{justify-items:center}
-.result-banner .wrap>div:first-child{width:100%}
-.result-banner p{margin-right:auto;margin-left:auto}
 .result-content .card h4,.result-content .sh h2,.result-content .tb h5{font-weight:700}
 .result-content .note,.result-content .list li,.result-content .tb .lead{font-weight:600}
 .result-content .list{padding:0;list-style:none}
-.result-content .meas .m{display:flex;flex-direction:column;align-items:center;justify-content:center}
 .result-content .meas .m small,.result-content .meas .m em{font-weight:600}
-.result-content .chips{justify-content:center}
-.result-content .tp{justify-items:center}
 .result-content .tb{width:100%}
-.result-content .tb .lead{margin:0 auto}
 .result-content .tb h5{margin-top:20px}
-@media(max-width:820px){.result-banner .wrap{grid-template-columns:1fr}}
