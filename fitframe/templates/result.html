@@ -21,4 +21,58 @@
 <h5>Colors</h5><div class="chips">{% for x in o.colors %}<span class="chip">{{ x }}</span>{% endfor %}</div></div></div>
 {% endfor %}
 <div style="text-align:center;margin-top:40px"><a class="btn" href="/start">Analyze another photo</a></div></div>
+<script>
+const resultMotionPreference=window.matchMedia('(prefers-reduced-motion: reduce)');
+if(!resultMotionPreference.matches){
+	const confettiCanvas=document.createElement('canvas');
+	confettiCanvas.className='result-confetti';
+	confettiCanvas.setAttribute('aria-hidden','true');
+	document.body.append(confettiCanvas);
+	const context=confettiCanvas.getContext('2d');
+	const canvasWidth=window.innerWidth;
+	const canvasHeight=window.innerHeight;
+	const pixelRatio=Math.min(window.devicePixelRatio||1,2);
+	confettiCanvas.width=canvasWidth*pixelRatio;
+	confettiCanvas.height=canvasHeight*pixelRatio;
+	context.scale(pixelRatio,pixelRatio);
+	const styles=getComputedStyle(document.documentElement);
+	const colors=['--p','--v','--accent','--lime','--mountbatten-pink']
+		.map(name=>styles.getPropertyValue(name).trim()).filter(Boolean);
+	const particles=Array.from({length:90},()=>({
+		x:canvasWidth*(.35+Math.random()*.3),
+		y:canvasHeight*.22,
+		vx:(Math.random()-.5)*9,
+		vy:-Math.random()*8-2,
+		size:4+Math.random()*5,
+		rotation:Math.random()*Math.PI*2,
+		spin:(Math.random()-.5)*.2,
+		color:colors[Math.floor(Math.random()*colors.length)]
+	}));
+	const startedAt=performance.now();
+	const drawConfetti=now=>{
+		if(resultMotionPreference.matches){confettiCanvas.remove();return;}
+		const elapsed=now-startedAt;
+		context.clearRect(0,0,canvasWidth,canvasHeight);
+		particles.forEach(particle=>{
+			particle.x+=particle.vx;
+			particle.y+=particle.vy;
+			particle.vy+=.18;
+			particle.rotation+=particle.spin;
+			context.save();
+			context.globalAlpha=Math.max(0,1-elapsed/1300);
+			context.translate(particle.x,particle.y);
+			context.rotate(particle.rotation);
+			context.fillStyle=particle.color;
+			context.fillRect(-particle.size/2,-particle.size/2,particle.size,particle.size*.65);
+			context.restore();
+		});
+		if(elapsed<1300)window.requestAnimationFrame(drawConfetti);
+		else confettiCanvas.remove();
+	};
+	resultMotionPreference.addEventListener('change',event=>{
+		if(event.matches)confettiCanvas.remove();
+	});
+	window.requestAnimationFrame(drawConfetti);
+}
+</script>
 {% endblock %}

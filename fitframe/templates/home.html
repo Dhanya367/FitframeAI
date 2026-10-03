@@ -2,7 +2,7 @@
 {% block body %}
 <section class="hero"><div class="wrap"><div>
 <span class="eyebrow">A more considered way to get dressed</span>
-<h1>Style that works with <span>your proportions.</span></h1>
+<h1>Style that works with <span>your <span class="word-swap">shape</span></span></h1>
 <p class="lead">A photo-based fit guide with outfit ideas, color notes and practical suggestions shaped around your measurements.</p>
 <div class="cta-row"><a class="btn" href="/register">Sign up</a><a class="btn o" href="#how">How it works</a></div>
 <p class="home-signin">Already have an account? <a href="/login?lamp=1">Sign in</a></p></div>
@@ -17,14 +17,100 @@
 </div></div></div>
 <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" height="60"><path d="M0 40C240 90 480 0 720 30S1200 80 1440 20V80H0Z"/></svg></section>
 <section class="sec" id="how"><div class="wrap"><div class="head rv"><span class="eyebrow">How it works</span><h2>Three simple steps</h2><p>From photo to personal style guide in a few seconds.</p></div>
-<div class="g3">
-<div class="card rv"><div class="ico">01</div><div class="n">THE FIRST STEP</div><h3>Add a photo</h3><p>Use a full-body front photo and your height. A side photo is optional.</p></div>
-<div class="card rv"><div class="ico">02</div><div class="n">THE FIT</div><h3>See your proportions</h3><p>Body landmarks are used to estimate shoulder, waist and hip measurements.</p></div>
-<div class="card rv"><div class="ico">03</div><div class="n">THE IDEAS</div><h3>Make it your own</h3><p>Explore outfit combinations, color suggestions and practical styling notes.</p></div></div></div></section>
+<div class="g3 how-cards">
+<article class="how-card rv" role="button" tabindex="0" aria-pressed="false" aria-label="Add a photo"><div class="how-card-inner"><div class="how-card-face how-card-front"><div class="ico">01</div><h3>Add a photo</h3></div><div class="how-card-face how-card-back" aria-hidden="true"><p>Use a full-body front photo and your height. A side photo is optional.</p></div></div></article>
+<article class="how-card rv" role="button" tabindex="0" aria-pressed="false" aria-label="See your proportions"><div class="how-card-inner"><div class="how-card-face how-card-front"><div class="ico">02</div><h3>See your proportions</h3></div><div class="how-card-face how-card-back" aria-hidden="true"><p>Body landmarks are used to estimate shoulder, waist and hip measurements.</p></div></div></article>
+<article class="how-card rv" role="button" tabindex="0" aria-pressed="false" aria-label="Make it your own"><div class="how-card-inner"><div class="how-card-face how-card-front"><div class="ico">03</div><h3>Make it your own</h3></div><div class="how-card-face how-card-back" aria-hidden="true"><p>Explore outfit combinations, color suggestions and practical styling notes.</p></div></div></article></div></div></section>
 <section class="sec"><div class="wrap"><div class="head rv"><span class="eyebrow">Why FitFrame</span><h2>Simple, private, personal</h2></div>
 <div class="g3">
 <div class="card rv"><div class="ico">A</div><h3>Quick to use</h3><p>Sign up once, then get a personal style guide in a couple of seconds.</p></div>
 <div class="card rv"><div class="ico">B</div><h3>Private by design</h3><p>Photos are processed in memory and never saved on the server.</p></div>
 <div class="card rv"><div class="ico">C</div><h3>Made for your fit</h3><p>Outfit ideas, colors and tips start with your own proportions.</p></div></div></div></section>
 <div class="wrap"><div class="cta rv"><h2>Ready to find your style?</h2><p>It takes less than a minute and it's completely free.</p><a class="btn w" href="/register">Sign up</a></div></div>
+<script>
+document.querySelectorAll('.how-card').forEach(card=>{
+	const front=card.querySelector('.how-card-front');
+	const back=card.querySelector('.how-card-back');
+	let hovering=false;
+	let pinned=false;
+	const setFlipped=flipped=>{
+		card.classList.toggle('is-flipped',flipped);
+		card.setAttribute('aria-pressed',String(pinned));
+		front.setAttribute('aria-hidden',String(flipped));
+		back.setAttribute('aria-hidden',String(!flipped));
+	};
+	card.addEventListener('pointerenter',event=>{
+		if(event.pointerType==='mouse'){hovering=true;setFlipped(true);}
+	});
+	card.addEventListener('pointerleave',event=>{
+		if(event.pointerType==='mouse'){hovering=false;if(!pinned)setFlipped(false);}
+	});
+	card.addEventListener('click',()=>{pinned=!pinned;setFlipped(pinned||hovering);});
+	card.addEventListener('keydown',event=>{
+		if(event.key==='Enter'||event.key===' '){event.preventDefault();pinned=!pinned;setFlipped(pinned||hovering);}
+	});
+});
+const homeHero=document.querySelector('.hero');
+const heroFigures=[...document.querySelectorAll('.hero .shape-sample .sil')];
+const motionPreference=window.matchMedia('(prefers-reduced-motion: reduce)');
+let scrollFramePending=false;
+const updateHeroScroll=()=>{
+	scrollFramePending=false;
+	if(motionPreference.matches)return;
+	const progress=Math.max(0,Math.min(1,window.scrollY/Math.max(homeHero.offsetHeight,1)));
+	homeHero.style.setProperty('--hero-hue',`${progress*32}deg`);
+	heroFigures.forEach((figure,index)=>{
+		const speed=.035+index*.022;
+		figure.style.setProperty('--parallax-y',`${-Math.min(window.scrollY*speed,36)}px`);
+	});
+};
+const requestHeroScrollUpdate=()=>{
+	if(!scrollFramePending){scrollFramePending=true;window.requestAnimationFrame(updateHeroScroll);}
+};
+if(!motionPreference.matches){
+	window.addEventListener('scroll',requestHeroScrollUpdate,{passive:true});
+	window.addEventListener('resize',requestHeroScrollUpdate);
+	requestHeroScrollUpdate();
+}
+motionPreference.addEventListener('change',event=>{
+	if(event.matches){
+		window.removeEventListener('scroll',requestHeroScrollUpdate);
+		window.removeEventListener('resize',requestHeroScrollUpdate);
+		homeHero.style.setProperty('--hero-hue','0deg');
+		heroFigures.forEach(figure=>figure.style.setProperty('--parallax-y','0px'));
+	}else{
+		window.addEventListener('scroll',requestHeroScrollUpdate,{passive:true});
+		window.addEventListener('resize',requestHeroScrollUpdate);
+		requestHeroScrollUpdate();
+	}
+});
+const swapWord=document.querySelector('.word-swap');
+const swapWords=['shape','style','fit'];
+let swapIndex=0;
+let swapTimer;
+const startWordSwap=()=>{
+	if(motionPreference.matches||swapTimer)return;
+	swapTimer=window.setInterval(()=>{
+		swapWord.classList.add('word-exit');
+		window.setTimeout(()=>{
+			if(motionPreference.matches){swapWord.classList.remove('word-exit');return;}
+			swapIndex=(swapIndex+1)%swapWords.length;
+			swapWord.textContent=swapWords[swapIndex];
+			swapWord.classList.remove('word-exit');
+			swapWord.classList.add('word-enter');
+			window.setTimeout(()=>swapWord.classList.remove('word-enter'),320);
+		},180);
+	},2000);
+};
+const stopWordSwap=()=>{
+	window.clearInterval(swapTimer);
+	swapTimer=undefined;
+	swapWord.classList.remove('word-exit','word-enter');
+};
+if(!motionPreference.matches)startWordSwap();
+motionPreference.addEventListener('change',event=>{
+	if(event.matches)stopWordSwap();
+	else startWordSwap();
+});
+</script>
 {% endblock %}
