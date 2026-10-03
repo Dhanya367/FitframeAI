@@ -2,9 +2,9 @@
 {% block body %}
 {% set dims={'Rectangle':(40,38,40),'Pear':(34,28,50),'Apple':(44,46,38),'Hourglass':(46,26,46),'Inverted Triangle':(52,32,34)} %}
 {% set d=dims[r.body_type] %}
-<section class="banner"><div class="wrap"><div><span class="eyebrow">{{ name }}, your {{ style_preference }} style and {{ r.body_type }} body type</span><h1>{{ r.body_type }}</h1><p>{{ rec.summary }}</p></div>
+<section class="banner result-banner"><div class="wrap"><div><span class="eyebrow">{{ name }}, your {{ style_preference }} style and {{ r.body_type }} body type</span><h1>{{ r.body_type }}</h1><p>{{ rec.summary }}</p></div>
 {{ sil(*d) }}</div></section>
-<div class="wrap pull">
+<div class="wrap pull result-content">
 <div class="card rv"><h4>Your measurements</h4>
 <div class="meas"><div class="m"><small>Shoulders</small><b>{{ "%g"|format(r.shoulder_in) }}"</b><em>{{ r.shoulder_cm }} cm</em></div>
 <div class="m"><small>Waist</small><b>{{ "%g"|format(r.waist_in) }}"</b><em>{{ r.waist_cm }} cm</em></div>
